@@ -1,0 +1,13 @@
+.mat-radio-group {
+    & > mat-label:first-child {
+        display: block;
+        margin-bottom: .5rem;
+    }
+
+    &.horizontal {
+        > .mat-radio-button {
+            display: inline-block !important;
+            margin-right: 1rem;
+        }
+    }
+}

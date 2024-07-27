@@ -1,5 +1,5 @@
 <div>
-    <h>{{pageTitle$ | async}}</h>
+    <h1>{{pageTitle$ | async}}</h1>
     <button type="button" cb3Button level="tertiary" [matMenuTriggerFor]="moreMenu"
         *ngIf="store.taskIsNew$ | async | not">
         <mat-icon>more_vert</mat-icon>
@@ -37,14 +37,12 @@
                                 </mat-select>
                                 <mat-error controlName="finished"></mat-error>
                             </mat-form-field>
-
-                        </cb3-page-section>
-
+                        </div>
                     </ng-container>
 
                     <ng-template #viewTpl>
                         <ng-container *ngIf="store.task$ | async as task">
-                            <cb3-page-section header="Task details">
+                            <div>"Task details"
 
                                 <button data-section-action cb3Button level="secondary" (click)="onEnableEdit()">Edit
                                 </button>
@@ -68,7 +66,7 @@
                                     </div>
 
                                 </div>
-                            </cb3-page-section>
+                            </div>
 
                         </ng-container>
                     </ng-template>

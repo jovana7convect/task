@@ -1,16 +1,18 @@
-import {RouterModule, Routes} from "@angular/router";
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {ReactiveFormsModule} from "@angular/forms";
-import {MatCardModule} from "@angular/material/card";
-import {MatInputModule} from "@angular/material/input";
-import {MatMenuModule} from "@angular/material/menu";
+import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatCardModule } from "@angular/material/card";
+import { MatInputModule } from "@angular/material/input";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatIconModule } from "@angular/material/icon";
 
-import {ManageTaskComponent} from "./manage-task.component";
-import {MatOptionModule} from "@angular/material/core";
-import {MatSelectModule} from "@angular/material/select";
+import { ManageTaskComponent } from "./manage-task.component";
+import { MatOptionModule } from "@angular/material/core";
+import { MatSelectModule } from "@angular/material/select";
 import { ManageTaskService } from "./manage-task.service";
 import { manageTaskResolve } from "./manage-task.resolve";
+import { NotPipeModule } from "src/app/pipes/not-pipe/not-pipe.module";
 
 const ROUTES: Routes = [
     {
@@ -31,7 +33,9 @@ const ROUTES: Routes = [
         MatInputModule,
         MatMenuModule,
         MatOptionModule,
-        MatSelectModule
+        MatSelectModule,
+        MatIconModule,
+        NotPipeModule
     ],
     declarations: [
         ManageTaskComponent

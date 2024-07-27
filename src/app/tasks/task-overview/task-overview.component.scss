@@ -1,27 +1,35 @@
+@import "src/styles/variables/custom-variables";
+
+.main {
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .header {
+        font-size: medium;
+        font-weight: 700;
+    }
+
+    .addBtn {
+        padding: 1rem;
+        background-color: $color-primary-blue-extra-light;
+        color: $color-basic-gray-500;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+    }
+}
+
 :host {
     .data-table {
-        width: 100%;
+        padding: 2rem;
 
-        .mat-row:hover {
-            background-color: aquamarine;
+        .mat-mdc-row:hover {
+            background-color: $color-basic-gray-200;
             cursor: pointer;
-        }
-
-        .mat-column- {
-            &actions {
-                width: 50px;
-                max-width: 50px;
-
-                a {
-                    display: block;
-                    padding-top: 0.5rem;
-                    color: blue;
-
-                    &:hover, &:visited {
-                        color: gray;
-                    }
-                }
-            }
         }
     }
 }

@@ -3,7 +3,7 @@ import { map, mergeMap, switchMap, take, takeUntil, tap, withLatestFrom } from "
 import { Observable } from "rxjs";
 
 import { ManageTaskService } from "./manage-task.service";
-import { Task } from "../task-overview/task-overview.component";
+import { Task } from "src/app/models/task.model";
 import { BaseComponentStore } from "src/app/store/base-component-store";
 
 interface ManageTaskStoreState {

@@ -5,7 +5,7 @@ import { BehaviorSubject } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { ManageTaskStore } from "./manage-task.store";
-import { Task } from "../task-overview/task-overview.component";
+import { Task } from "src/app/models/task.model";
 
 @Component({
     selector: "app-manage-task",

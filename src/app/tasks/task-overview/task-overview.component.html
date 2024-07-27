@@ -1,5 +1,6 @@
-<div class="">Tasks overview
-    <button [routerLink]="[routingInfo.baseLink, 'new']">
+<div class="main">
+    <div class="header">Tasks overview</div>
+    <button class="addBtn" [routerLink]="[baseLink, 'new']">
         New task
     </button>
 </div>
@@ -18,11 +19,13 @@
             <th mat-header-cell *matHeaderCellDef>
                 <span>Finished</span>
             </th>
-            <td mat-cell *matCellDef="let e">{{e.finished}}</td>
+            <td mat-cell *matCellDef="let e">
+                <mat-icon [status]="e.finished"></mat-icon>
+              </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="[routingInfo.baseLink, note.uuid]">
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="[baseLink, row.uuid]">
         </tr>
     </table>
 </div>

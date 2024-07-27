@@ -2,7 +2,7 @@ import { forkJoin, Observable, ObservableInput } from "rxjs"
 import { inject } from "@angular/core"
 import { ActivatedRouteSnapshot } from "@angular/router"
 import { ForkJoinSource } from "src/app/rxjs/util"
-import { Task } from "../task-overview/task-overview.component"
+import { Task } from "src/app/models/task.model";
 import { ManageTaskService } from "./manage-task.service"
 import { ManageTaskStoreData } from "./manage-task.store"
 

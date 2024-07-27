@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Selector, Store } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { Observable, take, ObservableInput, switchMap } from "rxjs";
 import { AppState } from "../store/app.state";
 
@@ -12,10 +12,10 @@ export abstract class BaseNgrxService {
     }
 
     /**
-     * Select from store (streaming).
-     * @see {Store.select}
-     */
-    public select<T extends AppState, R>(selector: Selector<T, R>): Observable<R> {
+    * Select from store (streaming).
+    * @see {Store.select}
+    */
+    public select<R>(selector: (state: AppState) => R): Observable<R> {
         return this.store.select(selector);
     }
 
@@ -23,22 +23,19 @@ export abstract class BaseNgrxService {
      * Select from store once then complete.
      * @see {Store.select}
      */
-    public selectOnce<T extends AppState, R>(selector: Selector<T, R>, skipNull: boolean = true): Observable<R> {
+    public selectOnce<R>(selector: (state: AppState) => R, skipNull: boolean = true): Observable<R> {
         return this.select(selector).pipe(take(1));
     }
 
     public selectApiVersion(): Observable<string> {
-        const selectApiVer = (s: AppState): string => s.apiVersion
-        return this.store.select(selectApiVer)
+        return this.select((s: AppState) => s.apiVersion || 'v1');
     }
 
     public selectApiVersionOnce(): Observable<string> {
-        return this.selectApiVersion()
-            .pipe(take(1))
+        return this.selectApiVersion().pipe(take(1));
     }
 
     public withApiVersion<T>(project: (apiVersion: string) => ObservableInput<T>): Observable<T> {
-        return this.selectApiVersionOnce()
-            .pipe(switchMap(project));
+        return this.selectApiVersionOnce().pipe(switchMap(project));
     }
 }

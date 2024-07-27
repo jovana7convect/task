@@ -1,0 +1,11 @@
+.resizable-dialog  .mat-dialog-container{
+     resize: both;
+}
+
+.resizable-dialog-horizontal .mat-dialog-container {
+    resize: horizontal;
+}
+
+.overflow-visible .mat-dialog-content {
+    overflow: visible;
+}

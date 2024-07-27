@@ -1,24 +1,19 @@
-import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from "@angular/core";
-import {MatTableDataSource} from "@angular/material/table";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { MatTableDataSource } from "@angular/material/table";
 
-import {TasksOverviewStore} from "./task-overview.store";
-
-export interface Task {
-    uuid: string | null;
-    name: string;
-    finished: boolean;
-}
+import { TasksOverviewStore } from "./task-overview.store";
+import { Task } from "src/app/models/task.model";
 
 @Component({
     selector: "app-task-overview",
-    templateUrl: "./tasks-overview.component.html",
-    styleUrls: ["./tasks-overview.component.scss"],
+    templateUrl: "./task-overview.component.html",
+    styleUrls: ["./task-overview.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TasksOverviewStore]
 })
 export class TaskOverviewComponent implements OnInit {
 
-    public readonly baseLink = "/api/tasks/edit/";
+    public readonly baseLink = "/tasks/edit/";
 
     public readonly dataSource = new MatTableDataSource<Task>([]);
     public readonly displayedColumns: string[] = [
@@ -26,7 +21,7 @@ export class TaskOverviewComponent implements OnInit {
     ];
 
 
-    constructor(public readonly store: TasksOverviewStore) {}
+    constructor(public readonly store: TasksOverviewStore) { }
 
     public ngOnInit() {
 
@@ -34,7 +29,7 @@ export class TaskOverviewComponent implements OnInit {
          * Optimize this subscription.
          */
 
-        this.store.Tasks$
+        this.store.tasks$
             .subscribe(data => {
                 this.dataSource.data = data
             });

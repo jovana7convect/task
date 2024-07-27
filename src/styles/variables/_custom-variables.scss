@@ -1,0 +1,38 @@
+$color-basic-white: #ffffff;
+$color-basic-gray-100: #f7f7f7;
+$color-basic-gray-200: #eaecef;
+$color-basic-gray-300: #c4c4c4;
+$color-basic-gray-400: #989898;
+$color-basic-gray-500: #6e757c;
+$color-basic-gray-600: #747474;
+$color-basic-gray-700: #495057;
+$color-basic-gray-800: #292929;
+$color-basic-gray-900: #212121;
+
+$color-primary-blue-dark: #345fb9;
+$color-primary-blue-main: #276fe4;
+$color-primary-blue-light: #d1e4fc;
+$color-primary-blue-extra-light: #e9f0fd;
+$color-top-bar-gradient-start: #0453b0;
+$color-top-bar-gradient-end: #004698;
+$color-solid-blue: #001841;
+
+$primary-color: $color-primary-blue-main;
+$secondary-color: $color-primary-blue-dark;
+
+$font-size-base: 14px;
+$line-height-base: 21px;
+$font-size-small: $font-size-base * 0.875;
+$line-height-small: $line-height-base * 0.875;
+$font-size-medium-small: $font-size-base * 1.14;
+$line-height-medium-small: $line-height-base * 1.14;
+$font-size-medium: $font-size-base * 1.25;
+$line-height-medium: $line-height-base * 1.25;
+$font-size-big: $font-size-base * 1.5;
+$line-height-big: $line-height-base * 1.5;
+$font-size-bigger: $font-size-base * 1.75;
+$line-height-bigger: $line-height-base * 1.75;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;

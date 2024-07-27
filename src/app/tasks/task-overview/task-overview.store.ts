@@ -1,9 +1,11 @@
-import {Injectable} from "@angular/core"
-import {createEntityAdapter, EntityState} from "@ngrx/entity"
-import {Observable} from "rxjs"
-import {map, mergeMap, takeUntil, tap} from "rxjs/operators"
-import { Task } from "./task-overview.component"
+import { Injectable } from "@angular/core"
+import { EntityState } from "@ngrx/entity"
+import { Observable } from "rxjs"
+import { map, mergeMap, takeUntil, tap } from "rxjs/operators"
+import { Task } from "src/app/models/task.model";
 import { TaskOverviewService } from "./task-overview.service"
+import { BaseComponentStore } from "src/app/store/base-component-store"
+import { taskOverviewResolve } from "./task-overview.resolve"
 
 
 interface TaskStoreState {
@@ -15,35 +17,35 @@ export interface TaskStoreData {
 }
 
 @Injectable()
-export class TasksOverviewStore {
+export class TasksOverviewStore extends BaseComponentStore<TaskStoreState> {
 
-    private readonly TasksAdapter = createEntityAdapter<Task>();
-    private readonly TasksSelectors = this.TasksAdapter.getSelectors();
-    public readonly Tasks$: Observable<Task[]> = this
-        .select(s => s.Tasks)
-        .pipe(map(this.TasksSelectors.selectAll));
+    private readonly tasksAdapter = this.createEntityAdapter<Task>();
+    private readonly tasksSelectors = this.tasksAdapter.getSelectors();
+    public readonly tasks$: Observable<Task[]> = this
+        .select(s => s.tasks)
+        .pipe(map(this.tasksSelectors.selectAll));
 
     constructor(service: TaskOverviewService) {
         super(service)
 
         this.setState({
-            Tasks: this.TasksAdapter.getInitialState()
+            tasks: this.tasksAdapter.getInitialState()
         })
 
         this.activatedRoute.data
-            .pipe(takeUntil(this.destroy$), map(d => d.storeData))
-            .subscribe((sd: TasksStoreData) => this.setStoreData(sd))
+            .pipe(takeUntil(this.destroy$), map(d => d["storeData"]))
+            .subscribe((sd: TaskStoreData) => this.setStoreData(sd))
 
     }
 
     public refresh: () => void = this.effect($ => $.pipe(
         mergeMap(() => this.runResolve(taskOverviewResolve)),
-        tap((sd: TasksStoreData) => this.setStoreData(sd))
+        tap((sd: TaskStoreData) => this.setStoreData(sd))
     ))
 
-    public setStoreData(data: TasksStoreData) {
+    public setStoreData(data: TaskStoreData) {
         this.patchState(s => ({
-            tasks: this.TasksAdapter.setAll(data.tasks, s.tasks)
+            tasks: this.tasksAdapter.setAll(data.tasks, s.tasks)
         }))
     }
 

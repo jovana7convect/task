@@ -1,0 +1,77 @@
+.form-flex {
+    &__row {
+        display: flex;
+
+        & + & {
+            margin-top: 15px;
+        }
+    }
+
+    &__field {
+        width: 30%;
+
+        &:not(:first-child) {
+            margin-left: 4%;
+        }
+
+        &--toggle {
+            width: 45%;
+        }
+    }
+
+    &__combi {
+        &-default {
+            display: flex;
+            width: 65%;
+            max-width: 1000px;
+        }
+
+        &-label {
+            width: 50%;
+        }
+
+        &-group {
+            width: 50%;
+        }
+
+        &-radio {
+            & mat-radio-group {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        &-input {
+            &.disabled {
+                opacity: 0.7;
+                pointer-events: none;
+            }
+        }
+    }
+}
+
+.combi-field {
+    width: 72%;
+    display: flex;
+    align-items: center;
+    max-width: 1000px;
+
+    & .toggle {
+        width: 50%;
+        margin-top: -17px;
+        margin-right: 20px;
+    }
+
+    & .disabled {
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    & .combi-input {
+        width: 30%;
+
+        & mat-form-field {
+            width: 100%;
+        }
+    }
+}

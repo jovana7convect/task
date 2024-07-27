@@ -13,7 +13,8 @@ const ROUTES: Routes = [
     },
     {
         path: "",
-        redirectTo: "overview"
+        redirectTo: "overview",
+        pathMatch: 'full'
     }
 ]
 

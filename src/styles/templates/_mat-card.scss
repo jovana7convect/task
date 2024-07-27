@@ -1,0 +1,36 @@
+@import "../variables/custom-variables";
+
+$card-border-radius: 10px;
+$card-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+
+.mat-card > .mat-card-content {
+    // Override the default font-size from ng material cards
+    font-size: $font-size-base;
+}
+
+.mat-card, .card-like {
+    border-radius: $card-border-radius !important;
+    box-shadow: $card-shadow !important;
+    background-color: $color-basic-white;
+
+    &[color=primary], &.active {
+        border: 1px solid $color-primary-blue-main;
+        background-color: $color-primary-blue-extra-light;
+    }
+
+    &.bottom-plain {
+        border-radius: $card-border-radius $card-border-radius 0 0 !important;
+    }
+}
+
+/**
+ * Use the card-like class to have page wrappers look like mat-card.
+ * Except for padding, margin etc.
+ */
+.card-like {
+    overflow: hidden;
+
+    &--overflow-x-auto {
+        overflow-x: auto;
+    }
+}

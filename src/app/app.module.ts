@@ -3,6 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TaskOverviewModule } from './tasks/task-overview/task-overview.module';
+import { ManageTaskModule } from './tasks/manage-task/manage-task.module';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, ROUTES } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from './store/app.reducer';
 
 @NgModule({
   declarations: [
@@ -10,7 +16,11 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    StoreModule.forRoot({ app: appReducer }),
+    AppRoutingModule,
+    TaskOverviewModule,
+    ManageTaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,161 @@
+.flex-spacer {
+    display: block;
+    flex-grow: 1;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.max-w-800 {
+    max-width: 800px;
+}
+
+.d-flex {
+    display: flex;
+    align-items: flex-start;
+
+    &.flex-wrap {
+        flex-wrap: wrap;
+    }
+
+    &.flex-row {
+        flex-direction: row;
+    }
+
+    &.flex-column {
+        flex-direction: column;
+    }
+
+    &.flex-align-center {
+        align-items: center;
+    }
+
+    &.flex-align-end {
+        align-items: end;
+    }
+
+    &.flex-align-stretch {
+        align-items: stretch
+    }
+
+    &.justify-space-between {
+        justify-content: space-between;
+    }
+
+    &.justify-center {
+        justify-content: center;
+    }
+
+    &.justify-start {
+        justify-content: flex-start;
+    }
+
+    &.justify-end {
+        justify-content: flex-end;
+    }
+
+    .grow-0 {
+        flex-grow: 0;
+    }
+
+    .grow-1 {
+        flex-grow: 1;
+    }
+}
+
+.d-block {
+    display: block !important;
+}
+
+.d-inline-block {
+    display: inline-block !important;
+}
+
+.text-align {
+    &-x-left {
+        text-align: left;
+    }
+
+    &-x-center {
+        text-align: center;
+    }
+
+    &-x-right {
+        text-align: right;
+    }
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.w-0 {
+    width: 0;
+}
+
+@mixin gen-levels($property, $base-value) {
+    &-0 {
+        #{$property}: $base-value * 0 !important;
+    }
+
+    &-1 {
+        #{$property}: $base-value * .25 !important;
+    }
+
+    &-2 {
+        #{$property}: $base-value * .5 !important;
+    }
+
+    &-3 {
+        #{$property}: $base-value * .75 !important;
+    }
+
+    &-4 {
+        #{$property}: $base-value !important;
+    }
+
+    &-5 {
+        #{$property}: $base-value * 1.25 !important;
+    }
+}
+
+.mt {
+    @include gen-levels(margin-top, 1rem);
+}
+
+.mb {
+    @include gen-levels(margin-bottom, 1rem);
+}
+
+.ms {
+    @include gen-levels(margin-left, 1rem);
+}
+
+.me {
+    @include gen-levels(margin-right, 1rem);
+}
+
+.ma {
+    @include gen-levels(margin, 1rem);
+}
+
+.pt {
+    @include gen-levels(padding-top, 1rem);
+}
+
+.pb {
+    @include gen-levels(padding-bottom, 1rem);
+}
+
+.ps {
+    @include gen-levels(padding-left, 1rem);
+}
+
+.pe {
+    @include gen-levels(padding-right, 1rem);
+}
+
+.pa {
+    @include gen-levels(padding, 1rem);
+}

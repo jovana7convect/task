@@ -50,8 +50,8 @@ export abstract class BaseComponentStore<S extends object> extends ComponentStor
     }
 
 
-    protected createEntityAdapter<T extends { uuid: string }>(sortComparer?: Comparer<T>): BaseEntityAdapter<T> {
-        return this.createCustomIdEntityAdapter<T>(e => e.uuid, sortComparer)
+    protected createEntityAdapter<T extends { uuid: string | null }>(sortComparer?: Comparer<T>): BaseEntityAdapter<T> {
+        return this.createCustomIdEntityAdapter<T>(e => e.uuid!!, sortComparer)
     }
 
 
