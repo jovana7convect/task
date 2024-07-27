@@ -1,0 +1,39 @@
+import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatTableModule } from "@angular/material/table";
+import { MatSortModule } from "@angular/material/sort"
+import { TaskOverviewService } from "./task-overview.service";
+import { TaskOverviewComponent } from "./task-overview.component";
+import { taskOverviewResolve } from "./task-overview.resolve";
+
+
+const ROUTES: Routes = [
+    {
+        path: "",
+        component: TaskOverviewComponent,
+        resolve: {
+            storeData: taskOverviewResolve
+        }
+    }
+]
+
+@NgModule({
+    imports: [
+        RouterModule.forChild(ROUTES),
+        CommonModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatSortModule
+    ],
+    declarations: [
+        TaskOverviewComponent
+    ],
+    providers: [
+        TaskOverviewService
+    ]
+})
+
+export class TaskOverviewModule {
+}

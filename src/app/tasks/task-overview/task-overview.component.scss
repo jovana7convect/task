@@ -1,0 +1,27 @@
+:host {
+    .data-table {
+        width: 100%;
+
+        .mat-row:hover {
+            background-color: aquamarine;
+            cursor: pointer;
+        }
+
+        .mat-column- {
+            &actions {
+                width: 50px;
+                max-width: 50px;
+
+                a {
+                    display: block;
+                    padding-top: 0.5rem;
+                    color: blue;
+
+                    &:hover, &:visited {
+                        color: gray;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,80 @@
+<div>
+    <h>{{pageTitle$ | async}}</h>
+    <button type="button" cb3Button level="tertiary" [matMenuTriggerFor]="moreMenu"
+        *ngIf="store.taskIsNew$ | async | not">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #moreMenu xPosition="before">
+        <button mat-menu-item (click)="deleteTask()">Delete task</button>
+    </mat-menu>
+</div>
+
+
+<div class="columns mt-4">
+    <div class="col span-6-of-12">
+        <form [formGroup]="formGroup" (submit)="onFormSubmit()">
+            <mat-card class="mat-elevation-z4">
+                <mat-card-content>
+                    <ng-container *ngIf="editorActive$ | async; else viewTpl">
+                        <div header="Task details">
+                            <button data-section-action cb3Button type="submit" [disabled]="formGroup.invalid">Save
+                            </button>
+                            <button data-section-action cb3Button level="secondary" type="button"
+                                [disabled]="store.taskIsNew$ | async" (click)="onCancelEdit()" color="gray">Cancel
+                            </button>
+
+                            <mat-form-field appearance="outline" dense>
+                                <mat-label>Name *</mat-label>
+                                <input matInput formControlName="name" placeholder="Name" />
+                                <mat-error controlName="name"></mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" dense>
+                                <mat-label>Finished *</mat-label>
+                                <mat-select placeholder="Finished" formControlName="finished">
+                                    <mat-option value="FINISHED">Yes</mat-option>
+                                    <mat-option value="UNFINISHED">No</mat-option>
+                                </mat-select>
+                                <mat-error controlName="finished"></mat-error>
+                            </mat-form-field>
+
+                        </cb3-page-section>
+
+                    </ng-container>
+
+                    <ng-template #viewTpl>
+                        <ng-container *ngIf="store.task$ | async as task">
+                            <cb3-page-section header="Task details">
+
+                                <button data-section-action cb3Button level="secondary" (click)="onEnableEdit()">Edit
+                                </button>
+
+                                <div class="columns">
+
+                                    <div class="column-group">
+                                        <div class="col span-12-of-12">
+                                            <span label="Task name">
+                                                {{task.name}}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="column-group">
+                                        <div class="col span-12-of-12">
+                                            <span label="Finished">
+                                                {{task.finished}}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </cb3-page-section>
+
+                        </ng-container>
+                    </ng-template>
+                </mat-card-content>
+            </mat-card>
+        </form>
+
+    </div>
+</div>
