@@ -20,6 +20,12 @@
         outline: none;
         border: none;
         border-radius: 10px;
+        transition: transform .3s ease-in-out;
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
     }
 }
 

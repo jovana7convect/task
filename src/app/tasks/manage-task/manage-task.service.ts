@@ -23,7 +23,7 @@ export class ManageTaskService extends BaseNgrxService {
             this.http
                 .put<Task>(`https://api.mocki.io/v2/6glkc4fj/api/${apiVersion}/tasks/task/${task.uuid}`, task),
             this.http
-                .post<Task>("/api/tasks", task)
+                .post<Task>(`https://api.mocki.io/v2/6glkc4fj/api/${apiVersion}/tasks`, task)
         )
     }
 

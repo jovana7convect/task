@@ -13,6 +13,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { ManageTaskService } from "./manage-task.service";
 import { manageTaskResolve } from "./manage-task.resolve";
 import { NotPipeModule } from "src/app/pipes/not-pipe/not-pipe.module";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 const ROUTES: Routes = [
     {
@@ -35,7 +37,9 @@ const ROUTES: Routes = [
         MatOptionModule,
         MatSelectModule,
         MatIconModule,
-        NotPipeModule
+        NotPipeModule,
+        MatSlideToggleModule,
+        MatFormFieldModule,
     ],
     declarations: [
         ManageTaskComponent

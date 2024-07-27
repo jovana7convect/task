@@ -1,0 +1,49 @@
+@import "src/styles/variables/custom-variables";
+
+.main {
+    padding: 2rem;
+
+    &__form {
+        border-radius: 10px !important;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08) !important;
+        background-color: #ffffff;
+    }
+}
+
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &__btns {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    &__btn {
+        padding: 1rem;
+        background-color: $color-basic-gray-200;
+        color: $color-primary-blue-dark;
+        border: none;
+        border-radius: 10px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: $color-basic-gray-300;
+        }
+
+        &[disabled] {
+            background-color: $color-basic-gray-100;
+            color: $color-basic-gray-500;
+        }
+    }
+}
+
+.display-field {
+    font-size: larger;
+    font-weight: 500;
+    margin-top: 1rem;
+}

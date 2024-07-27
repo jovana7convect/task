@@ -13,7 +13,7 @@ import { Task } from "src/app/models/task.model";
 })
 export class TaskOverviewComponent implements OnInit {
 
-    public readonly baseLink = "/tasks/edit/";
+    public readonly baseLink = "/edit/";
 
     public readonly dataSource = new MatTableDataSource<Task>([]);
     public readonly displayedColumns: string[] = [

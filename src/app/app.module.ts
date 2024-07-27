@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { TaskOverviewModule } from './tasks/task-overview/task-overview.module';
 import { ManageTaskModule } from './tasks/manage-task/manage-task.module';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, ROUTES } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './store/app.reducer';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { appReducer } from './store/app.reducer';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot({ app: appReducer }),
     AppRoutingModule,
