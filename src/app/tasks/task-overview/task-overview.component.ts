@@ -25,9 +25,11 @@ export class TaskOverviewComponent implements OnInit {
 
     public ngOnInit() {
 
-        /**
-         * Optimize this subscription.
-         */
+         /** 
+         *  Optimize this subscription (in other words
+         *  add what is missing in order that this subscription keeps listening for new values -
+         *  but only until the component is live)
+         * */
 
         this.store.tasks$
             .subscribe(data => {
