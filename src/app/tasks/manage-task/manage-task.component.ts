@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { map, mergeMap } from "rxjs/operators";
+import { map, mergeMap, takeUntil } from "rxjs/operators";
 import { ActivatedRoute, Router } from "@angular/router";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { ManageTaskStore } from "./manage-task.store";
@@ -15,6 +15,8 @@ import { Task } from "src/app/models/task.model";
     providers: [ManageTaskStore]
 })
 export class ManageTaskComponent {
+    private readonly componentDestroyed$: Subject<void> = new Subject();
+
     public readonly pageTitle$ = this.store.taskIsNew$
         .pipe(mergeMap(isNew => isNew
             ? ["New task"]
@@ -36,11 +38,14 @@ export class ManageTaskComponent {
 
     public ngOnInit() {
         this.store.taskIsNew$
+            .pipe(takeUntil(this.componentDestroyed$))
             .subscribe(isNew => this.editorActive$.next(isNew))
 
-        this.store.task$.subscribe(t => {
-            if (t) this.formGroup.patchValue(t);
-        });
+        this.store.task$
+            .pipe(takeUntil(this.componentDestroyed$))
+            .subscribe(t => {
+                if (t) this.formGroup.patchValue(t);
+            });
     }
 
     public onEnableEdit() {
@@ -73,6 +78,15 @@ export class ManageTaskComponent {
     }
 
     public deleteTask() {
-        // implement this method
+        this.store.deleteTask()
+            .subscribe(() => {
+                this.router.navigate(["../../overview"],
+                    { relativeTo: this.activatedRoute, replaceUrl: true })
+            })
+    }
+
+    public ngOnDestroy(): void {
+        this.componentDestroyed$.next();
+        this.componentDestroyed$.complete();
     }
 }
