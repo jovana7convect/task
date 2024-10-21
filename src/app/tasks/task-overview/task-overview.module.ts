@@ -5,10 +5,10 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort"
 import { TaskOverviewService } from "./task-overview.service";
-import { TaskOverviewComponent } from "./task-overview.component";
 import { taskOverviewResolve } from "./task-overview.resolve";
 import { MatIconModule } from "@angular/material/icon";
 import { StatusIconModule } from "src/app/directives/status-icon/status-icon.module";
+import { TaskOverviewComponent } from "./task-overview.component";
 
 
 const ROUTES: Routes = [

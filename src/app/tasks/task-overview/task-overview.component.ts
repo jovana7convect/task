@@ -12,12 +12,12 @@ export interface Task {
 
 @Component({
     selector: "app-tasks",
-    templateUrl: "./tasks-overview.component.html",
-    styleUrls: ["./tasks-overview.component.scss"],
+    templateUrl: "./task-overview.component.html",
+    styleUrls: ["./task-overview.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TasksOverviewStore]
 })
-export class TasksOverviewComponent implements OnInit {
+export class TaskOverviewComponent implements OnInit {
 
     public readonly baseLink = "/api/tasks/edit/";
 
