@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { map, mergeMap } from "rxjs/operators";
+import { map, mergeMap, takeUntil } from "rxjs/operators";
 import { ActivatedRoute, Router } from "@angular/router";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { ManageTaskStore } from "./manage-task.store";
@@ -28,6 +28,8 @@ export class ManageTaskComponent {
         finished: new FormControl<boolean>(false, [Validators.required])
     })
 
+    private readonly componentDestroyed$: Subject<void> = new Subject();
+
     constructor(
         public readonly store: ManageTaskStore,
         private readonly router: Router,
@@ -35,15 +37,12 @@ export class ManageTaskComponent {
     ) { }
 
     public ngOnInit() {
-        /** 
-         *  Optimize these subscriptions (in other words
-         *  add what is missing in order that these 2 subscriptions keep listening for new values -
-         *  but only until the component is live)
-         * */
         this.store.taskIsNew$
+            .pipe(takeUntil(this.componentDestroyed$))
             .subscribe(isNew => this.editorActive$.next(isNew))
 
         this.store.task$
+            .pipe(takeUntil(this.componentDestroyed$))
             .subscribe(t => {
                 if (t) this.formGroup.patchValue(t);
             });
@@ -79,6 +78,15 @@ export class ManageTaskComponent {
     }
 
     public deleteTask() {
-        // Implement this method
+        this.store.deleteTask()
+            .subscribe(() => {
+                this.router.navigate(["../../overview"],
+                    { relativeTo: this.activatedRoute, replaceUrl: true })
+            })
+    }
+
+    public ngOnDestroy(): void {
+        this.componentDestroyed$.next();
+        this.componentDestroyed$.complete();
     }
 }

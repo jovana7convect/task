@@ -20,6 +20,8 @@
                 <span>Finished</span>
             </th>
             <td mat-cell *matCellDef="let e">
+                <mat-icon [status]="e.finished"></mat-icon>
+              </td>
                 {{e.finished}}
             </td>
         </ng-container>

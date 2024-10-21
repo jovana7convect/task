@@ -2,7 +2,12 @@
 
 .main {
     padding: 2rem;
-    // Add missing properties
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
 
     .header {
         font-size: medium;
@@ -11,6 +16,17 @@
 
     .addBtn {
         padding: 1rem;
+        background-color: $color-primary-blue-extra-light;
+        color: $color-basic-gray-500;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+        transition: transform .3s ease-in-out;
+        
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
     }
 }
 

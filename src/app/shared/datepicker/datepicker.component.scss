@@ -1,0 +1,201 @@
+@import "src/styles/variables/custom-variables";
+
+::ng-deep {
+    .date-picker {
+        .mat-form-field-infix {
+            display: flex;
+        }
+
+        .mat-form-field-wrapper {
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            padding-bottom: 0;
+            border-radius: 8px;
+            padding-left: .5rem;
+            padding-top: 0;
+
+            &:hover {
+                border-color: black;
+            }
+
+            &:active, &:focus, &:focus-within {
+                border-color: $color-primary-blue-main;
+            }
+        }
+
+        .mat-form-field {
+            padding-bottom: 4px;
+        }
+
+        .disabled.mat-form-field {
+            .mat-form-field-wrapper {
+                &:hover, &:active, &:focus, &:focus-within {
+                    border: 1px solid rgba(0, 0, 0, 0.12)
+                }
+            }
+        }
+
+        .mat-label {
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 10.5px;
+        }
+
+        .mat-form-field-type-mat-date-range-input .mat-form-field-infix,
+        .mat-form-field-appearance-legacy .mat-form-field-infix {
+            display: flex;
+            height: 13px;
+            align-items: flex-end;
+        }
+
+        .mat-form-field-underline {
+            display: none;
+        }
+
+        .mat-datepicker-toggle {
+            padding-right: .5rem;
+        }
+
+        .mat-date-range-input-inner {
+            &::placeholder {
+                color: rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        .mat-error {
+            margin-top: 1rem;
+        }
+
+        .mat-icon-button {
+            padding-top: .5rem;
+        }
+
+        .mat-button-ripple.mat-ripple, .mat-button-focus-overlay {
+            display: none;
+        }
+    }
+
+    .date-picker.mat-error-required {
+        .mat-form-field-wrapper {
+            border-color: #f5893c;
+
+            &:hover {
+                border-color: #f5893c;
+            }
+
+            &:active, &:focus, &:focus-within {
+                border-color: #f5893c;
+            }
+        }
+
+        .mat-label {
+            color: #f5893c;
+        }
+    }
+
+    .mat-datepicker-actions {
+        display: block !important;
+    }
+
+    .mat-calendar-controls {
+        .mat-button {
+            order: 2;
+            flex-grow: 2;
+        }
+
+        .mat-calendar-previous-button {
+            order: 1;
+        }
+
+        .mat-calendar-next-button {
+            order: 3;
+        }
+
+        .mat-calendar-spacer {
+            display: none;
+        }
+    }
+
+    .mat-calendar-body-selected {
+        background-color: #9e6100;
+        box-shadow: none;
+    }
+
+    .mat-calendar-body-today.mat-calendar-body-selected {
+        border: none;
+        box-shadow: none;
+    }
+
+    .mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+        border-color: #9e6100;
+        background-color: transparent !important;
+
+        &:hover {
+            background-color: #efa9a9 !important;
+        }
+    }
+
+    .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover >
+    .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical),
+    .cdk-keyboard-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical),
+    .cdk-program-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+        background-color: #efa9a9;
+    }
+
+    .mat-calendar-body-in-range::before {
+        background-color: #f6d0d0;
+    }
+}
+
+.mat-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: .5rem;
+    border-top: 1px solid $color-basic-gray-100;
+    width: 100%;
+
+    &__now {
+        color: #9e6100;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-weight: $font-weight-medium;
+        transition: transform 0.3s;
+        margin-right: 4px;
+
+        &:hover {
+            color: rgb(187, 60, 25);
+            transform: scale(1.1);
+        }
+    }
+
+    &__apply {
+        color: white;
+        background: linear-gradient(272.39deg, #9E0001 1.68%, #D00814 45.95%, #9E0001 97.17%);
+        opacity: .8;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        padding: 4px 10px;
+        transition: transform 0.3s;
+
+        &:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    }
+
+    &__cancel {
+        color: $color-basic-gray-600;
+        background: transparent;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: $font-weight-medium;
+        transition: transform 0.3s;
+
+        &:hover {
+            color: $color-basic-gray-900;
+            transform: scale(1.1);
+        }
+    }
+}

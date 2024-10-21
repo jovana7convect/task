@@ -1,35 +1,46 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
+import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from "@angular/core";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatSort} from "@angular/material/sort";
+import {MatPaginator} from "@angular/material/paginator";
 
-import { TasksOverviewStore } from "./task-overview.store";
-import { Task } from "src/app/models/task.model";
+import {TasksOverviewStore} from "./task-overview.store";
+
+export interface Task {
+    name: string;
+    finished: boolean;
+}
 
 @Component({
-    selector: "app-task-overview",
-    templateUrl: "./task-overview.component.html",
-    styleUrls: ["./task-overview.component.scss"],
+    selector: "app-tasks",
+    templateUrl: "./tasks-overview.component.html",
+    styleUrls: ["./tasks-overview.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TasksOverviewStore]
 })
-export class TaskOverviewComponent implements OnInit {
+export class TasksOverviewComponent implements OnInit {
 
-    public readonly baseLink = "/edit/";
+    public readonly baseLink = "/api/tasks/edit/";
 
     public readonly dataSource = new MatTableDataSource<Task>([]);
     public readonly displayedColumns: string[] = [
         "name", "finished"
     ];
 
+    @ViewChild(MatSort, { static: true })
+    public sort!: MatSort;
+    @ViewChild(MatPaginator, { static: true })
+    public paginator!: MatPaginator;
 
-    constructor(public readonly store: TasksOverviewStore) { }
+    constructor(public readonly store: TasksOverviewStore) {
+    }
 
     public ngOnInit() {
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
 
-         /** 
-         *  Optimize this subscription (in other words
-         *  add what is missing in order that this subscription keeps listening for new values -
-         *  but only until the component is live)
-         * */
+        /**
+         * Optimize this subscription.
+         */
 
         this.store.tasks$
             .subscribe(data => {

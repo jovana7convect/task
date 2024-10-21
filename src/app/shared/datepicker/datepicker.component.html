@@ -1,0 +1,84 @@
+<ng-container *ngIf="range; else default">
+    <div class="date-picker" [ngClass]="{
+  'mat-error-required': (dateRangeFormGroup.controls.selectedStartDate.hasError('required')
+  || dateRangeFormGroup.controls.selectedEndDate.hasError('required')) && dateInputClicked && !disabled}">
+        <mat-form-field (click)="dateInputClicked = true" [ngClass]="{'disabled' : disabled}">
+            <mat-label class="mat-label">{{rangeDateLabel}}</mat-label>
+            <mat-date-range-input [formGroup]="dateRangeFormGroup" [rangePicker]="dateRangePicker" [min]="minStartDate"
+                                  [max]="maxEndDate">
+                <input
+                    [readonly]="true"
+                    matStartDate
+                    [placeholder]="startDatePlaceholder"
+                    formControlName="selectedStartDate"
+                    (dateChange)="onStartDateChange($event.target.value)">
+                <input
+                    [readonly]="true"
+                    matEndDate
+                    [placeholder]="endDatePlaceholder"
+                    formControlName="selectedEndDate"
+                    (dateChange)="onEndDateChange($event.target.value)">
+            </mat-date-range-input>
+            <mat-datepicker-toggle [for]="dateRangePicker" [disabled]="disabled">
+                <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-date-range-picker #dateRangePicker (closed)="dateInputClicked = true">
+                <mat-date-range-picker-actions>
+                    <div class="mat-footer">
+                        <button mat-button class="mat-footer__cancel" matDateRangePickerCancel>Annuleren</button>
+                        <button mat-raised-button class="mat-footer__apply" matDateRangePickerApply
+                                (click)="applyChanges()">
+                            Ok
+                        </button>
+                    </div>
+                </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+            <mat-error *ngIf="(dateRangeFormGroup.controls.selectedStartDate.hasError('required') ||
+                       dateRangeFormGroup.controls.selectedEndDate.hasError(
+            'required')) && !disabled">Dit veld is verplicht
+            </mat-error>
+        </mat-form-field>
+    </div>
+</ng-container>
+<ng-template #default>
+    <div class="date-picker"
+         [ngClass]="{'mat-error-required': (selectedDate.hasError('required') && dateInputClicked
+         || (invalidDate$ | async)) && !disabled || (!selectedDate.hasError('required') && selectedDate.errors && !disabled)}">
+        <mat-form-field (click)="dateInputClicked = true" [ngClass]="{'disabled' : disabled}">
+            <mat-label class="mat-label">{{dateLabel}}</mat-label>
+            <input
+                #dateInput
+                matInput
+                [placeholder]="datePlaceholder"
+                [matDatepicker]="datePicker"
+                [min]="minDate"
+                [max]="maxDate"
+                (dateChange)="onDateChange($event.target.value)"
+                (input)="onInputChange($event.target?.value)"
+                [formControl]="selectedDate"
+                (blur)="onInputBlur()"
+                [readonly]="disabled"
+                autocomplete="off"
+            />
+            <mat-datepicker-toggle [for]="datePicker" [disabled]="disabled"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker (closed)="dateInputClicked = true">
+                <mat-datepicker-actions>
+                    <div class="mat-footer">
+                        <button mat-button class="mat-footer__cancel" matDatepickerCancel>Annuleren</button>
+                        <button mat-raised-button class="mat-footer__apply" matDatepickerApply>
+                            Ok
+                        </button>
+                    </div>
+                </mat-datepicker-actions>
+            </mat-datepicker>
+            <mat-error *ngIf="selectedDate.hasError('required') && !disabled" class="mat-error">
+                This field is required.
+            </mat-error>
+            <mat-error *ngIf="!selectedDate.hasError('required') && (invalidDate$ | async) && !disabled
+                        || (!selectedDate.hasError('required') && (selectedDate.errors && !disabled))"
+                       class="mat-error">
+                Invalid date.
+            </mat-error>
+        </mat-form-field>
+    </div>
+</ng-template>

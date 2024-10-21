@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { map, switchMap, take, takeUntil, tap } from "rxjs/operators"
+import { map, mergeMap, switchMap, take, takeUntil, tap, withLatestFrom } from "rxjs/operators"
 import { Observable } from "rxjs";
 
 import { ManageTaskService } from "./manage-task.service";
@@ -48,7 +48,15 @@ export class ManageTaskStore extends BaseComponentStore<ManageTaskStoreState> {
         )
     }
 
-    public deleteTask() {
-       // Implement this method
+    public deleteTask(): Observable<void> {
+        return this.taskId$.pipe(
+            take(1),
+            withLatestFrom(this.apiVersion$),
+            mergeMap(([taskId, apiVersion]) =>
+                this.service.deleteTask(apiVersion, taskId!!)),
+            tap(() => this.patchState(() => ({
+                task: null
+            })))
+        )
     }
 }
