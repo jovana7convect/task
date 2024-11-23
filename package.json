@@ -7,6 +7,15 @@
     "build": "ng build",
     "lint": "ng lint"
   },
+  "lint-staged": {
+    "*.(js|ts|html)": [
+      "prettier --write",
+      "eslint --max-warnings 0"
+    ],
+    "*.(css|sass|scss|less|json)": [
+      "prettier --write"
+    ]
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.3.12",
@@ -39,7 +48,17 @@
     "@angular/compiler-cli": "^17.3.12",
     "@angular/language-service": "^17.3.12",
     "@types/node": "^16.18.23",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsdoc": "^50.5.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.0",
     "ng-packagr": "^17.3.0",
+    "prettier": "^3.3.3",
     "ts-node": "^8.5.4",
     "typescript": "5.4.5"
   }
