@@ -32,22 +32,7 @@
             "styles": [
               "src/styles/main.scss"
             ],
-            "scripts": [
-              "node_modules/tinymce/tinymce.js",
-              "node_modules/tinymce/themes/modern/theme.js",
-              "node_modules/tinymce/plugins/textcolor/plugin.js",
-              "node_modules/tinymce/plugins/colorpicker/plugin.js",
-              "node_modules/tinymce/plugins/table/plugin.js",
-              "node_modules/tinymce/plugins/link/plugin.js",
-              "node_modules/tinymce/plugins/autolink/plugin.js",
-              "node_modules/tinymce/plugins/lists/plugin.js",
-              "node_modules/tinymce/plugins/image/plugin.js",
-              "node_modules/tinymce/plugins/imagetools/plugin.js",
-              "node_modules/tinymce/plugins/pagebreak/plugin.js",
-              "node_modules/tinymce/plugins/code/plugin.js",
-              "node_modules/tinymce/plugins/noneditable/plugin.js",
-              "node_modules/tinymce/plugins/fullscreen/plugin.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -80,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "task-app:build:production"
+              "buildTarget": "task-app:build:production"
             },
             "development": {
-              "browserTarget": "task-app:build:development"
+              "buildTarget": "task-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "task-app:build"
+            "buildTarget": "task-app:build"
           }
         },
         "test": {
