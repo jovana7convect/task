@@ -15,6 +15,7 @@ import { manageTaskResolve } from "./manage-task.resolve";
 import { NotPipeModule } from "src/app/pipes/not-pipe/not-pipe.module";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import {DatePickerComponent} from "../../shared/datepicker/datepicker.component";
 
 const ROUTES: Routes = [
     {
@@ -40,6 +41,7 @@ const ROUTES: Routes = [
         NotPipeModule,
         MatSlideToggleModule,
         MatFormFieldModule,
+        DatePickerComponent,
     ],
     declarations: [
         ManageTaskComponent

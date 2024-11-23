@@ -128,11 +128,11 @@
     @include gen-levels(margin-bottom, 1rem);
 }
 
-.ms {
+.ml {
     @include gen-levels(margin-left, 1rem);
 }
 
-.me {
+.mr {
     @include gen-levels(margin-right, 1rem);
 }
 
@@ -148,11 +148,11 @@
     @include gen-levels(padding-bottom, 1rem);
 }
 
-.ps {
+.pl {
     @include gen-levels(padding-left, 1rem);
 }
 
-.pe {
+.pr {
     @include gen-levels(padding-right, 1rem);
 }
 

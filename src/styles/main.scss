@@ -1,20 +1,16 @@
-@import "variables/material-variables";
-@import "variables/custom-variables";
+@use '@angular/material' as mat;
+@import "./variables/custom-variables";
 
 // Templates
-@import "templates/layout";
-@import "templates/containers";
-@import "templates/lists";
-@import "templates/columns";
-@import "templates/buttons";
-@import "templates/mat-card";
-@import "templates/mat-form-field";
-@import "templates/mat-chip";
-@import "templates/mat-table";
-@import "templates/mat-radio-group";
-@import "templates/combi-fields";
-@import "templates/typography";
-@import "templates/mat-dialog";
+@import "./templates/layout";
+@import "./templates/containers";
+@import "./templates/lists";
+@import "./templates/columns";
+@import "./templates/buttons";
+@import "./templates/mat-card";
+@import "./templates/mat-form-field";
+@import "./templates/mat-table";
+@import "./templates/typography";
 
 html {
     font-family: 'Roboto', 'Helvetica', sans-serif;

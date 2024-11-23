@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { map, mergeMap, takeUntil } from "rxjs/operators";
+import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
+import {map, mergeMap, take, takeUntil} from "rxjs/operators";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, Subject } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { ManageTaskStore } from "./manage-task.store";
 import { Task } from "src/app/models/task.model";
+import {BaseComponentStore} from "../../store/base-component-store";
 
 @Component({
     selector: "app-manage-task",
@@ -14,7 +15,7 @@ import { Task } from "src/app/models/task.model";
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ManageTaskStore]
 })
-export class ManageTaskComponent {
+export class ManageTaskComponent extends BaseComponentStore<ManageTaskComponent> implements OnInit {
     public readonly pageTitle$ = this.store.taskIsNew$
         .pipe(mergeMap(isNew => isNew
             ? ["New task"]
@@ -32,9 +33,11 @@ export class ManageTaskComponent {
 
     constructor(
         public readonly store: ManageTaskStore,
-        private readonly router: Router,
-        private readonly activatedRoute: ActivatedRoute
-    ) { }
+        // protected override readonly router: Router,
+        // protected override readonly activatedRoute: ActivatedRoute
+    ) {
+      super();
+    }
 
     public ngOnInit() {
         this.store.taskIsNew$
@@ -55,8 +58,9 @@ export class ManageTaskComponent {
     public onCancelEdit() {
         this.editorActive$.next(false);
 
-        // Optimize this subscription
-        this.store.task$.subscribe(t => {
+        this.store.task$
+          .pipe(take(1))
+          .subscribe(t => {
             if (t) this.formGroup.patchValue(t);
         });
     }
@@ -85,8 +89,15 @@ export class ManageTaskComponent {
             })
     }
 
-    public ngOnDestroy(): void {
-        this.componentDestroyed$.next();
-        this.componentDestroyed$.complete();
+  public patchDate(date: number) {
+    this.formGroup.patchValue({dueDate: date});
+  }
+
+  public handleInvalidDate(isInvalid: boolean) {
+    if (isInvalid) {
+      this.formGroup.get("dueDate")?.setErrors({ invalidDate: true });
+    } else {
+      this.formGroup.get("dueDate")?.setErrors(null);
     }
+  }
 }

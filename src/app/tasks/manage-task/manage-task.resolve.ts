@@ -13,7 +13,8 @@ export const manageTaskResolve = (route: ActivatedRouteSnapshot): Observable<Man
 
     const newTask = (): Task => {
         return {
-            uuid: null,
+          dueDate: new Date().getTime(),
+          uuid: null,
             name: "",
             finished: true
         }

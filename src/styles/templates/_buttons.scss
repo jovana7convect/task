@@ -6,25 +6,3 @@
         margin-right: .5em;
     }
 }
-
-.mat-raised-button, .mat-button {
-    border-radius: 8px !important;
-}
-
-cb-data-cell {
-    .button-container {
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-
-        button {
-            flex: 1 1 auto;
-
-            &.mat-icon-button {
-                margin-right: 0;
-            }
-        }
-    }
-}

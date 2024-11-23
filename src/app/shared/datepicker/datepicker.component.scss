@@ -18,7 +18,7 @@
             }
 
             &:active, &:focus, &:focus-within {
-                border-color: $color-primary-blue-main;
+                border-color: $color-primary-orange-main;
             }
         }
 
@@ -39,7 +39,6 @@
             font-size: 10.5px;
         }
 
-        .mat-form-field-type-mat-date-range-input .mat-form-field-infix,
         .mat-form-field-appearance-legacy .mat-form-field-infix {
             display: flex;
             height: 13px;
@@ -52,12 +51,6 @@
 
         .mat-datepicker-toggle {
             padding-right: .5rem;
-        }
-
-        .mat-date-range-input-inner {
-            &::placeholder {
-                color: rgba(0, 0, 0, 0.4);
-            }
         }
 
         .mat-error {
@@ -138,10 +131,6 @@
     .cdk-keyboard-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical),
     .cdk-program-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
         background-color: #efa9a9;
-    }
-
-    .mat-calendar-body-in-range::before {
-        background-color: #f6d0d0;
     }
 }
 

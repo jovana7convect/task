@@ -4,6 +4,8 @@ import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 
 import {TasksOverviewStore} from "./task-overview.store";
+import {takeUntil} from "rxjs/operators";
+import {BaseComponentStore} from "../../store/base-component-store";
 
 export interface Task {
     name: string;
@@ -17,13 +19,13 @@ export interface Task {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TasksOverviewStore]
 })
-export class TaskOverviewComponent implements OnInit {
+export class TaskOverviewComponent extends BaseComponentStore<TaskOverviewComponent> implements OnInit {
 
     public readonly baseLink = "/api/tasks/edit/";
 
     public readonly dataSource = new MatTableDataSource<Task>([]);
     public readonly displayedColumns: string[] = [
-        "name", "finished"
+        "name", "dueDate", "finished"
     ];
 
     @ViewChild(MatSort, { static: true })
@@ -32,22 +34,24 @@ export class TaskOverviewComponent implements OnInit {
     public paginator!: MatPaginator;
 
     constructor(public readonly store: TasksOverviewStore) {
+      super();
     }
 
     public ngOnInit() {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
 
-        /**
-         * Optimize this subscription.
-         */
-
-        this.store.tasks$
-            .subscribe(data => {
+      /**
+       * Subscribing to the store data
+       * Only until the component is active
+       * After it is destroyed, do not listen anymore to the observable output
+       */
+      this.store.tasks$
+            .pipe(takeUntil(this.destroy$))
+              .subscribe(data => {
                 this.dataSource.data = data
             });
 
     }
-
 
 }
