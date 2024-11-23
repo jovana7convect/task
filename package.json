@@ -1,15 +1,11 @@
 {
   "name": "task-app",
-  "version": "3.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "remove-dist-environments": "node scripts/remove-dist-environments.js",
-    "build": "ng build -c production --base-href \"/v2/\"",
-    "lint": "ng lint",
-    "build:cb-schematics": "npm run build --prefix projects/cb-schematics",
-    "build:cb-schematics:link": "npm run pkg:link --prefix projects/cb-schematics",
-    "postinstall": "npm run build:cb-schematics && npm run build:cb-schematics:link"
+    "build": "ng build",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -29,16 +25,9 @@
     "@ngrx/router-store": "^16.3.0",
     "@ngrx/store": "^16.3.0",
     "@ngrx/store-devtools": "^16.3.0",
-    "aws-amplify": "^5.0.21",
-    "file-saver": "2.0.2",
-    "hammerjs": "^2.0.8",
-    "inputmask": "^5.0.6",
-    "quill": "^1.3.7",
     "rxjs": "~7.8.0",
-    "tinymce": "4.7.12",
     "tslib": "^2.3.0",
-    "xlsx": "^0.18.5",
-    "zen-observable-ts": "^0.8.19",
+    "ws": "^8.18.0",
     "zone.js": "~0.13.3"
   },
   "devDependencies": {
@@ -49,17 +38,9 @@
     "@angular/cli": "^16.2.13",
     "@angular/compiler-cli": "^16.2.12",
     "@angular/language-service": "^16.2.12",
-    "@types/file-saver": "2.0.1",
-    "@types/inputmask": "^5.0.1",
     "@types/node": "^16.18.23",
-    "@types/quill": "^1.3.10",
-    "acorn": "^8.8.2",
-    "core-js": "^3.4.7",
-    "glob": "^9.3.2",
     "ng-packagr": "^16.2.3",
     "ts-node": "^8.5.4",
-    "tslint": "^6.1.3",
-    "tslint-import-group-ordering": "^2.1.2",
     "typescript": "4.9.5"
   }
 }
