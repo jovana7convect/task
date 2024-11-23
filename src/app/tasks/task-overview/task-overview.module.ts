@@ -7,8 +7,8 @@ import {MatSortModule} from "@angular/material/sort"
 import {TaskOverviewService} from "./task-overview.service";
 import {taskOverviewResolve} from "./task-overview.resolve";
 import {MatIconModule} from "@angular/material/icon";
-import {StatusIconModule} from "src/app/directives/status-icon/status-icon.module";
 import {TaskOverviewComponent} from "./task-overview.component";
+import {StatusIconDirective} from "../../directives/status-icon/status-icon.directive";
 
 
 const ROUTES: Routes = [
@@ -29,7 +29,7 @@ const ROUTES: Routes = [
     MatTableModule,
     MatSortModule,
     MatIconModule,
-    StatusIconModule
+    StatusIconDirective
   ],
   declarations: [
     TaskOverviewComponent

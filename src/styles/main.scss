@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @import "./variables/custom-variables";
+@import "./variables/material-variables";
 
 // Templates
 @import "./templates/layout";
@@ -13,13 +14,12 @@
 @import "./templates/typography";
 
 html {
-    font-family: 'Roboto', 'Helvetica', sans-serif;
-    font-size: $font-size-base;
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  font-size: $font-size-base;
 }
 
 body {
-    margin: 0;
+  margin: 0;
 }
-
 
 

@@ -67,13 +67,16 @@ export class ManageTaskComponent extends BaseComponentStore<ManageTaskComponent>
 
     public onFormSubmit() {
         if (this.formGroup.invalid) return;
-        const Task = this.formGroup.getRawValue();
+        const task = this.formGroup.getRawValue();
 
         this.editorActive$.next(false);
 
-        // Optimize this subscription
-        this.store.saveTask(Task)
-            .subscribe((t: Task) => {
+        console.log(task);
+
+        this.store.saveTask(task)
+          .pipe(take(1))
+          .subscribe((t: Task) => {
+              console.log(t)
                 this.router.navigate(["..", t.uuid], {
                     relativeTo: this.activatedRoute,
                     replaceUrl: true

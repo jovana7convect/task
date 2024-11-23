@@ -16,7 +16,7 @@
               <div class="task-form__header">
                 <button type="submit" class="task-form__btn" [disabled]="formGroup.invalid">Save
                 </button>
-                <button type="button" class="task-form__btn" [disabled]="store.taskIsNew$ | async"
+                <button type="button" class="task-form__btn" *ngIf="store.taskIsNew$ | async | not"
                         (click)="onCancelEdit()">Cancel
                 </button>
               </div>
@@ -71,9 +71,10 @@
                   </div>
                   <div class="column-group display-field">
                     <div class="col span-12-of-12">
-                                            <span label="Finished">
-                                                {{task.finished}}
-                                            </span>
+                      <div class="d-flex flex-align-center">
+                        <mat-icon class="mr-2" [status]="task.finished"></mat-icon>
+                        {{task.finished}}
+                      </div>
                     </div>
                   </div>
                 </div>

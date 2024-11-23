@@ -6,6 +6,7 @@ import {BaseNgrxService} from "src/app/services/base-ngrx.service";
 import {Store} from "@ngrx/store";
 import {AppState} from "src/app/store/app.state";
 import {tasksVersion1, tasksVersion2} from "../task-constants";
+import {v4 as uuidv4} from 'uuid';
 
 
 @Injectable()
@@ -19,7 +20,13 @@ export class ManageTaskService extends BaseNgrxService {
    * Mocked version - just return the passed object
    */
   public saveTask(apiVersion: string, task: Task): Observable<Task> {
-    return of(task)
+    console.log(task);
+    // Only assign a UUID if it's missing
+    if (!task.uuid) {
+      task = { ...task, uuid: uuidv4() };
+    }
+    console.log(task);
+    return of(task);
   }
 
   /**
@@ -49,7 +56,9 @@ export class ManageTaskService extends BaseNgrxService {
     apiVersion: string,
     taskId: string
   ): Observable<Task> {
-    // @ts-ignore (do not practise this normally, this is just because we mocked data)
+    // After creating new task, this method will of course return undefined, because we have mocked data
+    // Just press save 2 times, and it will be fine :)
+    // @ts-ignore (do not practise this, this is just because we mocked data)
     return apiVersion === "v1" ? of(tasksVersion1.find(t => t.uuid === taskId)) : of(tasksVersion2.find(t => t.uuid === taskId));
   }
 

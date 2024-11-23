@@ -21,7 +21,7 @@ export interface Task {
 })
 export class TaskOverviewComponent extends BaseComponentStore<TaskOverviewComponent> implements OnInit {
 
-    public readonly baseLink = "/api/tasks/edit/";
+    public readonly baseLink = "/edit";
 
     public readonly dataSource = new MatTableDataSource<Task>([]);
     public readonly displayedColumns: string[] = [
