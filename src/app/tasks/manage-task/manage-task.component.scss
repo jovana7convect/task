@@ -1,49 +1,54 @@
 @import "src/styles/variables/custom-variables";
 
 .main {
-    padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background-color: $color-basic-gray-200;
 
-    &__form {
-        border-radius: 10px !important;
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08) !important;
-        background-color: #ffffff;
-    }
+  .header {
+    font-size: $font-size-bigger;
+    font-weight: $font-weight-bold;
+  }
 }
 
 .task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__header {
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
 
-    &__header {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
+  &__btn {
+    padding: 1rem;
+    background-color: $color-primary-orange-super-light;
+    color: $color-primary-orange-dark;
+    border: none;
+    border-radius: 10px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-primary-orange-light;
     }
 
-    &__btn {
-        padding: 1rem;
-        background-color: $color-basic-gray-200;
-        color: $color-primary-orange-dark;
-        border: none;
-        border-radius: 10px;
-
-        &:hover {
-            cursor: pointer;
-            background-color: $color-basic-gray-300;
-        }
-
-        &[disabled] {
-            background-color: $color-basic-gray-100;
-            color: $color-basic-gray-500;
-        }
+    &[disabled] {
+      background-color: $color-basic-gray-100;
+      color: $color-basic-gray-500;
+      cursor: not-allowed;
     }
+  }
 }
 
 .display-field {
-    font-size: larger;
-    font-weight: 500;
-    margin-top: 1rem;
+  font-size: larger;
+  font-weight: 500;
+  margin-top: 1rem;
 }

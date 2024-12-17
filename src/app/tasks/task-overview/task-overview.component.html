@@ -1,8 +1,6 @@
 <div class="main">
   <div class="header">Tasks overview</div>
-  <button class="addBtn" [routerLink]="[baseLink, 'new']">
-    New task
-  </button>
+  <button class="addBtn" [routerLink]="[baseLink, 'new']">New task</button>
   <!--  After creating new task, the get method from the edit resolver will return undefined -->
   <!--  As the newly created task will not be defined in the mocked data -->
   <!--  Just press save one more time if you want to edit after -->
@@ -10,36 +8,38 @@
 
 <div class="card-like">
   <table mat-table [dataSource]="dataSource" class="data-table">
-
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>
         <span>Name</span>
       </th>
-      <td mat-cell *matCellDef="let e">{{e.name}}</td>
+      <td mat-cell *matCellDef="let e">{{ e.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="dueDate">
       <th mat-header-cell *matHeaderCellDef>
         <span>Date</span>
       </th>
-      <td mat-cell *matCellDef="let e">{{e.date | date}}</td>
+      <td mat-cell *matCellDef="let e">{{ e.date | date }}</td>
     </ng-container>
 
     <ng-container matColumnDef="finished">
       <th mat-header-cell *matHeaderCellDef>
-        <span>Finished</span>
+        <span>Status</span>
       </th>
       <td mat-cell *matCellDef="let e">
         <div class="d-flex flex-align-center">
           <mat-icon class="mr-2" [status]="e.finished"></mat-icon>
-          {{e.finished}}
+          {{ e.finished ? "finished" : "not finished" }}
         </div>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="[baseLink, row.uuid]">
-    </tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [routerLink]="[baseLink, row.uuid]"
+    ></tr>
   </table>
 </div>
 

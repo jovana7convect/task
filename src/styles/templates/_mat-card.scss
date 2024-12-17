@@ -1,26 +1,36 @@
 @import "../variables/custom-variables";
 
 $card-border-radius: 10px;
-$card-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+$card-shadow: 10px 2px 20px rgba(0, 0, 0, 0.08);
 
-.mat-card > .mat-card-content {
-    // Override the default font-size from ng material cards
-    font-size: $font-size-base;
+.mat-mdc-card {
+  margin: 1rem;
+  border-radius: $card-border-radius !important;
+  box-shadow: $card-shadow !important;
+  background-color: $color-basic-white;
 }
 
-.mat-card, .card-like {
-    border-radius: $card-border-radius !important;
-    box-shadow: $card-shadow !important;
-    background-color: $color-basic-white;
+.mat-card > .mat-card-content {
+  // Override the default font-size from ng material cards
+  font-size: $font-size-base;
+}
 
-    &[color=primary], &.active {
-        border: 1px solid $color-primary-orange-main;
-        background-color: $color-primary-orange-light;
-    }
+.mat-card,
+.card-like {
+  margin: 1rem;
+  border-radius: $card-border-radius !important;
+  box-shadow: $card-shadow !important;
+  background-color: $color-basic-white;
 
-    &.bottom-plain {
-        border-radius: $card-border-radius $card-border-radius 0 0 !important;
-    }
+  &[color="primary"],
+  &.active {
+    border: 1px solid $color-primary-orange-light;
+    background-color: $color-primary-orange-super-light;
+  }
+
+  &.bottom-plain {
+    border-radius: $card-border-radius $card-border-radius 0 0 !important;
+  }
 }
 
 /**
@@ -28,9 +38,9 @@ $card-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
  * Except for padding, margin etc.
  */
 .card-like {
-    overflow: hidden;
+  overflow: hidden;
 
-    &--overflow-x-auto {
-        overflow-x: auto;
-    }
+  &--overflow-x-auto {
+    overflow-x: auto;
+  }
 }

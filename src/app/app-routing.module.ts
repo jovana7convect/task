@@ -4,22 +4,20 @@ import { TasksModule } from './tasks/tasks.module';
 
 const ROUTES: Routes = [
   {
-      path: "tasks",
-      loadChildren: () => import("./tasks/tasks.module").then(m => m.TasksModule),
-      pathMatch: "full"
+    path: 'tasks',
+    loadChildren: () =>
+      import('./tasks/tasks.module').then((m) => m.TasksModule),
+    pathMatch: 'full',
   },
   {
     path: '',
     redirectTo: 'tasks',
-    pathMatch: 'full'
-  }
-]
+    pathMatch: 'full',
+  },
+];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(ROUTES),
-    TasksModule
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(ROUTES), TasksModule],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

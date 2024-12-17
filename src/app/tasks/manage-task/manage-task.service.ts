@@ -1,19 +1,17 @@
-import {Injectable} from "@angular/core"
-import {HttpClient} from "@angular/common/http"
-import {iif, Observable, of} from "rxjs";
-import {Task} from "src/app/models/task.model";
-import {BaseNgrxService} from "src/app/services/base-ngrx.service";
-import {Store} from "@ngrx/store";
-import {AppState} from "src/app/store/app.state";
-import {tasksVersion1, tasksVersion2} from "../task-constants";
-import {v4 as uuidv4} from 'uuid';
-
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { iif, Observable, of } from 'rxjs';
+import { Task } from 'src/app/models/task.model';
+import { BaseNgrxService } from 'src/app/services/base-ngrx.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
+import { tasksVersion1, tasksVersion2 } from '../task-constants';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class ManageTaskService extends BaseNgrxService {
-
   constructor(http: HttpClient, store: Store<AppState>) {
-    super(http, store)
+    super(http, store);
   }
 
   /**
@@ -47,19 +45,17 @@ export class ManageTaskService extends BaseNgrxService {
   //     )
   // }
 
-
   /**
    * Mocked version - just return the passed object
    * Based on the apiVersion
    */
-  public getTask(
-    apiVersion: string,
-    taskId: string
-  ): Observable<Task> {
+  public getTask(apiVersion: string, taskId: string): Observable<Task> {
     // After creating new task, this method will of course return undefined, because we have mocked data
     // Just press save 2 times, and it will be fine :)
     // @ts-ignore (do not practise this, this is just because we mocked data)
-    return apiVersion === "v1" ? of(tasksVersion1.find(t => t.uuid === taskId)) : of(tasksVersion2.find(t => t.uuid === taskId));
+    return apiVersion === 'v1'
+      ? of(tasksVersion1.find((t) => t.uuid === taskId))
+      : of(tasksVersion2.find((t) => t.uuid === taskId));
   }
 
   /**
@@ -77,10 +73,7 @@ export class ManageTaskService extends BaseNgrxService {
    * Mocked version
    * of(void 0) creates an observable that immediately emits undefined and completes.
    */
-  public deleteTask(
-    apiVersion: string,
-    taskId: string
-  ): Observable<void> {
+  public deleteTask(apiVersion: string, taskId: string): Observable<void> {
     return of(void 0);
   }
 

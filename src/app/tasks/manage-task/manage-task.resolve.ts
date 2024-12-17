@@ -1,34 +1,33 @@
-import { forkJoin, Observable, ObservableInput } from "rxjs"
-import { inject } from "@angular/core"
-import { ActivatedRouteSnapshot } from "@angular/router"
-import { ForkJoinSource } from "src/app/rxjs/util"
-import { Task } from "src/app/models/task.model";
-import { ManageTaskService } from "./manage-task.service"
-import { ManageTaskStoreData } from "./manage-task.store"
+import { forkJoin, Observable, ObservableInput } from 'rxjs';
+import { inject } from '@angular/core';
+import { ActivatedRouteSnapshot } from '@angular/router';
+import { ForkJoinSource } from 'src/app/rxjs/util';
+import { Task } from 'src/app/models/task.model';
+import { ManageTaskService } from './manage-task.service';
+import { ManageTaskStoreData } from './manage-task.store';
 
+export const manageTaskResolve = (
+  route: ActivatedRouteSnapshot,
+): Observable<ManageTaskStoreData> => {
+  const service = inject(ManageTaskService);
+  const taskId = route.paramMap.get('taskId');
 
-export const manageTaskResolve = (route: ActivatedRouteSnapshot): Observable<ManageTaskStoreData> => {
-    const service = inject(ManageTaskService)
-    const taskId = route.paramMap.get("taskId");
+  const newTask = (): Task => {
+    return {
+      dueDate: new Date().getTime(),
+      uuid: null,
+      name: '',
+      finished: true,
+    };
+  };
 
-    const newTask = (): Task => {
-        return {
-          dueDate: new Date().getTime(),
-          uuid: null,
-            name: "",
-            finished: true
-        }
-    }
+  return service.withApiVersion((apiVersion) => {
+    const task: ObservableInput<Task> =
+      taskId === 'new' ? [newTask()] : service.getTask(apiVersion, taskId!!);
 
-    return service.withApiVersion(apiVersion => {
-        const task: ObservableInput<Task> = taskId === "new"
-            ? [newTask()]
-            : service.getTask(apiVersion, taskId!!)
-
-        const sources: ForkJoinSource<ManageTaskStoreData> = {
-            task
-        }
-        return forkJoin(sources)
-    })
-
-}
+    const sources: ForkJoinSource<ManageTaskStoreData> = {
+      task,
+    };
+    return forkJoin(sources);
+  });
+};

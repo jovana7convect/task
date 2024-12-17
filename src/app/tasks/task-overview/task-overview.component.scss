@@ -1,41 +1,43 @@
 @import "src/styles/variables/custom-variables";
 
 .main {
-    padding: 2rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: $color-basic-gray-200;
 
-    .header {
-        font-size: medium;
-        font-weight: $font-weight-bold;
+  .header {
+    font-size: $font-size-bigger;
+    font-weight: $font-weight-bold;
+  }
+
+  .addBtn {
+    padding: 1rem;
+    background-color: $color-primary-orange-super-light;
+    color: $color-basic-gray-500;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+      background-color: $color-primary-orange-light;
     }
-
-    .addBtn {
-        padding: 1rem;
-        background-color: $color-primary-orange-light;
-        color: $color-basic-gray-500;
-        outline: none;
-        border: none;
-        border-radius: 10px;
-        transition: transform .3s ease-in-out;
-
-        &:hover {
-            cursor: pointer;
-            transform: scale(1.1);
-        }
-    }
+  }
 }
 
 :host {
-    .data-table {
-        padding: 2rem;
+  .data-table {
+    padding: 2rem;
 
-        .mat-mdc-row:hover {
-            background-color: $color-basic-gray-200;
-            cursor: pointer;
-        }
+    .mat-mdc-row:hover {
+      background-color: $color-basic-gray-200;
+      cursor: pointer;
     }
+  }
 }
