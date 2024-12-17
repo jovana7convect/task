@@ -55,4 +55,8 @@ export class TaskOverviewComponent
       this.dataSource.data = data;
     });
   }
+
+  public onOptionSelected(version: string) {
+    this.store.setAppVersion(version);
+  }
 }

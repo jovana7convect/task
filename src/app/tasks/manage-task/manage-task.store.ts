@@ -56,7 +56,6 @@ export class ManageTaskStore extends BaseComponentStore<ManageTaskStoreState> {
   public saveTask(task: Task): Observable<Task> {
     return this.apiVersion$.pipe(
       take(1),
-      tap((res) => console.log(res)),
       switchMap((apiVersion) => this.service.saveTask(apiVersion, task)),
       tap((t: Task) => this.patchState(() => ({ task: t }))),
     );

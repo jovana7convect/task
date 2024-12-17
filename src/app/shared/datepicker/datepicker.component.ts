@@ -8,39 +8,39 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild
-} from "@angular/core";
+  ViewChild,
+} from '@angular/core';
 import {
   MatDatepicker,
-  MatDatepickerActions,
-  MatDatepickerInput,
-  MatDatepickerToggle
-} from "@angular/material/datepicker";
-import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
-import {NgClass, NgIf} from "@angular/common";
+  MatDatepickerModule,
+} from '@angular/material/datepicker';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { NgClass, NgIf } from '@angular/common';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: "app-datepicker",
-  templateUrl: "./datepicker.component.html",
-  styleUrls: ["./datepicker.component.scss"],
+  selector: 'app-datepicker',
+  templateUrl: './datepicker.component.html',
+  styleUrls: ['./datepicker.component.scss'],
   standalone: true,
   imports: [
     MatError,
-    MatDatepickerToggle,
-    MatDatepickerActions,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ReactiveFormsModule,
-    MatDatepickerInput,
     MatFormField,
     NgClass,
     NgIf,
-    MatDatepicker,
-    MatLabel
+    MatLabel,
+    MatInput,
+    MatButton,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerComponent implements OnInit, OnChanges {
-
   @Input()
   public required = false;
 
@@ -57,10 +57,10 @@ export class DatePickerComponent implements OnInit, OnChanges {
   public maxDate?: Date = new Date(new Date().getFullYear() + 99, 11, 31);
 
   @Input()
-  public dateLabel = "Select date";
+  public dateLabel = 'Select date';
 
   @Input()
-  public datePlaceholder = "dd-MM-yyyy";
+  public datePlaceholder = 'dd-MM-yyyy';
 
   @Output()
   public startDateEventEmitter = new EventEmitter<number>();
@@ -76,10 +76,9 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
   public selectedDate = new FormControl<Date | null>(null);
 
-  @ViewChild("datePicker") public datePicker!: MatDatepicker<Date>;
+  @ViewChild('datePicker') public datePicker!: MatDatepicker<Date>;
 
-  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {
-  }
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   public ngOnInit() {
     if (this.date) {
@@ -94,20 +93,30 @@ export class DatePickerComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges) {
-    if (changes.hasOwnProperty("date") && !changes["date"].currentValue && this.datePicker) {
+    if (
+      changes.hasOwnProperty('date') &&
+      !changes['date'].currentValue &&
+      this.datePicker
+    ) {
       this.selectedDate.markAsUntouched();
     }
 
-    if ((changes.hasOwnProperty("minDate") || changes.hasOwnProperty("maxDate"))) {
-      this.changeDetectorRef.detectChanges()
-      if (this.selectedDate.status === "INVALID" &&
-        (this.selectedDate.hasError("matDatepickerMax") || this.selectedDate.hasError("matDatepickerMin"))) {
+    if (
+      changes.hasOwnProperty('minDate') ||
+      changes.hasOwnProperty('maxDate')
+    ) {
+      this.changeDetectorRef.detectChanges();
+      if (
+        this.selectedDate.status === 'INVALID' &&
+        (this.selectedDate.hasError('matDatepickerMax') ||
+          this.selectedDate.hasError('matDatepickerMin'))
+      ) {
         this.selectedDate.markAsTouched();
         this.selectedDate.updateValueAndValidity();
       }
     }
 
-    if (this.selectedDate.status === "VALID" && !this.selectedDate.errors)
+    if (this.selectedDate.status === 'VALID' && !this.selectedDate.errors)
       this.changeDetectorRef.detectChanges();
   }
 

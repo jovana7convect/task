@@ -1,10 +1,13 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { AppState, initialState } from './app.state';
+import { createReducer, on } from '@ngrx/store';
+import { initialState } from './app.state';
+import { setAppVersion } from './app.actions';
 
-const _appReducer = createReducer(
-  initialState
+const _appReducer = createReducer(initialState);
+
+export const appReducer = createReducer(
+  initialState,
+  on(setAppVersion, (state, { version }) => ({
+    ...state,
+    apiVersion: version, // Update the apiVersion
+  })),
 );
-
-export function appReducer(state: AppState | undefined, action: Action) {
-  return _appReducer(state, action);
-}

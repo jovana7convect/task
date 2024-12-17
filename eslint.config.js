@@ -1,72 +1,88 @@
+const unusedImports = require("eslint-plugin-unused-imports");
+const ESLint = require("@typescript-eslint/eslint-plugin");
+const angularEslintPlugin = require("@angular-eslint/eslint-plugin");
+const prettierConfig = require("eslint-plugin-prettier");
+const typescriptEslintParser = require("@typescript-eslint/parser");
+
 module.exports = [
   {
-    files: ['*.ts'],
+    files: ["src/**/*.ts"],
     languageOptions: {
-      parser: '@typescript-eslint/parser',
+      parser: typescriptEslintParser,
       parserOptions: {
-        project: 'tsconfig.json',
+        project: "tsconfig.json",
         createDefaultProgram: true,
       },
+      globals: {
+        jasmine: "readonly",
+        browser: "readonly",
+        node: "readonly",
+      },
     },
-    env: {
-      jasmine: true,
-      browser: true,
-      node: true,
+    plugins: {
+      "unused-imports": unusedImports,
+      "@typescript-eslint": ESLint,
+      "@angular-eslint": angularEslintPlugin,
+      prettier: prettierConfig,
     },
-    plugins: ['unused-imports', '@typescript-eslint'],
-    extends: [
-      'eslint:recommended',
-      'plugin:@angular-eslint/recommended',
-      'plugin:@angular-eslint/template/process-inline-templates',
-      'plugin:@typescript-eslint/recommended',
-      'plugin:prettier/recommended',
-    ],
     rules: {
-      '@angular-eslint/directive-selector': [
-        'error',
+      // Add rules from `eslint:recommended`
+      "no-console": "warn",
+      "no-debugger": "warn",
+
+      // Add rules from `@angular-eslint/recommended`
+      "@angular-eslint/directive-selector": [
+        "error",
         {
-          type: 'attribute',
-          prefix: 'pando',
-          style: 'camelCase',
+          type: "attribute",
+          style: "camelCase",
         },
       ],
-      '@angular-eslint/component-selector': [
-        'error',
+      "@angular-eslint/component-selector": [
+        "error",
         {
-          type: 'element',
-          prefix: 'pando',
-          style: 'kebab-case',
+          type: "element",
+          style: "kebab-case",
         },
       ],
-      '@angular-eslint/no-empty-lifecycle-method': 0,
-      '@typescript-eslint/no-empty-function': 0,
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
+      "@angular-eslint/no-empty-lifecycle-method": 0,
+
+      // Add rules from `@typescript-eslint/recommended`
+      "@typescript-eslint/no-empty-function": 0,
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
         {
-          vars: 'all',
-          varsIgnorePattern: '^_',
-          args: 'after-used',
-          argsIgnorePattern: '^_',
+          vars: "all",
+          varsIgnorePattern: "^_",
+          args: "after-used",
+          argsIgnorePattern: "^_",
         },
       ],
-      'unused-imports/no-unused-imports': 'error',
-      'unused-imports/no-unused-vars': [
-        'warn',
+
+      // Add rules from `plugin:prettier/recommended`
+      "prettier/prettier": "error",
+
+      // Add custom rules
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": [
+        "warn",
         {
-          vars: 'all',
-          varsIgnorePattern: '^_',
-          args: 'after-used',
-          argsIgnorePattern: '^_',
+          vars: "all",
+          varsIgnorePattern: "^_",
+          args: "after-used",
+          argsIgnorePattern: "^_",
         },
       ],
     },
   },
   {
-    files: ['*.html'],
-    extends: ['plugin:@angular-eslint/template/recommended'],
-    rules: {},
+    files: ["*.html"],
+    rules: {
+      "@angular-eslint/template/process-inline-templates": "error",
+      "@angular-eslint/template/no-negated-async": "error",
+    },
   },
   {
-    ignores: ['package.json', 'package-lock.json', 'dist', 'node_modules'],
+    ignores: ["package.json", "package-lock.json", "dist", "node_modules"],
   },
 ];

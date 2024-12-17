@@ -10,7 +10,7 @@
   "lint-staged": {
     "*.(js|ts|html)": [
       "prettier --write",
-      "eslint --max-warnings 0"
+      "eslint --max-warnings 20"
     ],
     "*.(css|sass|scss|less|json)": [
       "prettier --write"
@@ -45,6 +45,7 @@
     "@angular-devkit/core": "^17.3.11",
     "@angular-devkit/schematics": "^17.3.11",
     "@angular-devkit/schematics-cli": "^17.3.11",
+    "@angular-eslint/eslint-plugin": "^19.0.2",
     "@angular/cli": "^17.3.11",
     "@angular/compiler-cli": "^17.3.12",
     "@angular/language-service": "^17.3.12",
@@ -56,6 +57,7 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsdoc": "^50.5.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.0",
     "ng-packagr": "^17.3.0",

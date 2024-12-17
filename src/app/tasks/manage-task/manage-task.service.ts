@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { iif, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Task } from 'src/app/models/task.model';
 import { BaseNgrxService } from 'src/app/services/base-ngrx.service';
 import { Store } from '@ngrx/store';
@@ -51,7 +51,7 @@ export class ManageTaskService extends BaseNgrxService {
    */
   public getTask(apiVersion: string, taskId: string): Observable<Task> {
     // After creating new task, this method will of course return undefined, because we have mocked data
-    // Just press save 2 times, and it will be fine :)
+    // Just press save 2 times, if you want to be in edit mode :)
     // @ts-ignore (do not practise this, this is just because we mocked data)
     return apiVersion === 'v1'
       ? of(tasksVersion1.find((t) => t.uuid === taskId))

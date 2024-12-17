@@ -13,7 +13,7 @@
       <mat-card>
         <mat-card-content>
           <ng-container *ngIf="editorActive$ | async; else viewTpl">
-            <div class="task-form" header="Task details">
+            <div class="task-form">
               <div class="task-form__header">
                 <button
                   type="submit"
@@ -62,8 +62,8 @@
                 <div class="column-group">
                   <div class="col span-6-of-12 mt-2">
                     <mat-slide-toggle formControlName="finished"
-                      >Status</mat-slide-toggle
-                    >
+                      >Finished
+                    </mat-slide-toggle>
                   </div>
                 </div>
               </div>
@@ -86,16 +86,22 @@
                 <div class="columns">
                   <div class="column-group display-field">
                     <div class="col span-12-of-12">
-                      <span label="Task name">
-                        {{ task.name }}
-                      </span>
+                      <mat-label>Name:</mat-label>
+                      <h5>{{ task.name }}</h5>
+                    </div>
+                  </div>
+                  <div class="column-group display-field">
+                    <div class="col span-12-of-12">
+                      <mat-label>Due date:</mat-label>
+                      <h5>{{ task.dueDate | date }}</h5>
                     </div>
                   </div>
                   <div class="column-group display-field">
                     <div class="col span-12-of-12">
                       <div class="d-flex flex-align-center">
+                        <mat-label>Status:</mat-label>
                         <mat-icon
-                          class="mr-2"
+                          class="ml-2 mr-2"
                           [status]="task.finished"
                         ></mat-icon>
                         {{ task.finished ? "finished" : "not finished" }}
